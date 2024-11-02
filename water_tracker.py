@@ -16,16 +16,19 @@ greetings = {1 : "Hey thirsty! Let's track your water intake!",
 
 greetingChoice = random.randrange(1, 6)
 more = 'y'
+totalIntake = []
 
 def IntakeLog():
     while True:
         try:
             intakeAmt = int(input(f'{greetings.get(greetingChoice)}\nWater Amount in mL: '))
+            totalIntake.append(intakeAmt)
             print(f'Wow so far your water intake is {intakeAmt} mL today!')
             selection = input('Do you want to log more water today? (y/n)')
             if selection in more:
                 continue
             else:
+                print(totalIntake)
                 return False
                 break
                 
@@ -33,6 +36,7 @@ def IntakeLog():
                 raise TypeError
         except:
             print("\nSomething went wrong, try again\n")
+    
     
 
 # Global code starts here ----------------------------------------------------------------------------------------------------------------------\
