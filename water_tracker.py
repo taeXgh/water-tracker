@@ -2,7 +2,7 @@
 # Water Tracker Application
 #
 #
-# Author: Thalia Edwards         Date: 11/2/2024
+# Author: Thalia Edwards         Date: 11/2/2024 
 #
 # Purpose: Linux Mint Desklet to track your water intake
 #---------------------------------------------------------------------
