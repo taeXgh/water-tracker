@@ -1,12 +1,10 @@
-import sqlite3
-from sqlite3 import Error
+import sqlite3 #adds the dependency
 
-def create_connection(path):
-    connection = None
-    try:
-        connection = sqlite3.connect(path)
-        print("Connection to SQLite DB successful")
-    except Error as e:
-        print(f"The error '{e}' occurred")
+con = sqlite3.connect("tutorial.db") #creates the database and connects to it
 
-    return connection
+cur = con.cursor()#creates a cursor to execute SQL statements and fetch results from queries
+cur.execute("CREATE TABLE movie(title, year, score)")
+
+res = cur.execute("SELECT name FROM sqlite_master")
+
+res.fetchone()
