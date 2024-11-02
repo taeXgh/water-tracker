@@ -1,43 +1,65 @@
-import sqlite3 #adds the dependency
-con = sqlite3.connect("tutorial.db") #creates the database and connects to it
+""" import sqlite3 #adds the dependency
+con = sqlite3.connect("intakelogs.db") #creates the database and connects to it
 
 cur = con.cursor()#creates a cursor to execute SQL statements and fetch results from queries
-cur.execute("CREATE TABLE IF NOT EXISTS movie(title, year, score)") #- executes the SQL command in the parenthesis
+cur.execute("CREATE TABLE IF NOT EXISTS intakelogs(dateTime, total)") #- executes the SQL command in the parenthesis
 
 res = cur.execute("SELECT name FROM sqlite_master")#result of the query
-res.fetchone()#fetches the row
 
-cur.execute("""
-    INSERT INTO movie VALUES
-        ('Monty Python and the Holy Grail', 1975, 8.2),
-        ('And Now for Something Completely Different', 1971, 7.5)
-""")
-con.commit() #when using 'INSERT' it starts a transaction that needs to be committed before saving changes in the datbase itself
+data = [
+    ("10/24/24", 16),
+    ("10/31/24", 8),
+    ("11/2/24", 12),
+]
 
-res = cur.execute("SELECT score FROM movie")
+cur.executemany("INSERT INTO intakelogs VALUES(?, ?)", data) #uses ? placeholders to protect code from an sql injection attack
+con.commit()#when using 'INSERT' it starts a transaction that needs to be committed before saving changes in the datbase itself
 
 res.fetchall() #fetches all resulting rows
 
-data = [
-    ("Monty Python Live at the Hollywood Bowl", 1982, 7.9),
-    ("Monty Python's The Meaning of Life", 1983, 7.5),
-    ("Monty Python's Life of Brian", 1979, 8.0),
-]
-cur.executemany("INSERT INTO movie VALUES(?, ?, ?)", data) #uses ? placeholders to protect code from an sql injection attack
-con.commit()
+for row in cur.execute("SELECT total FROM intakelogs ORDER BY dateTime"):
+    print(row) """
+#-------------------------------------------------------------------------------------------------------------------------------------------------------
+import random
 
-for row in cur.execute("SELECT year, title FROM movie ORDER BY year"):
+greetings = {1 : "Hey thirsty! Let's track your water intake!", 
+             2 : "You've been drinking, you've been drinking?",
+             3 : "How much have you had to drink tonight?",
+             4 : "Look at you drinking water!\nHow much have you had?",
+             5 : "You know the drill, how much water intake do you want to log?"}
 
-    print(row)
+motivation = {1 : "Good job!", 
+             2 : "You're doing amazing sweetie!",
+             3 : "Yay! Good work :)",
+             4 : "WOOOOO you're killing it",
+             5 : "You'll reach your goal in no time ;)"}
 
-con.close()
+messageChoice = random.randrange(1, 6)
+more = 'y'
+totalIntake = []
 
-new_con = sqlite3.connect("tutorial.db")
+def IntakeLog():
+    while True:
+        try:
+            intakeAmt = int(input(f'{greetings.get(messageChoice)}\nWater Amount in mL: ')) #initial greeting 
+            totalIntake.append(intakeAmt) #adds every entry to the totalIntake list
+            print(f'{motivation.get(messageChoice)}')#selects a random motivational message to encourage the user
+            selection = input('Do you want to log more water today? (y/n)')#determines whether the program ends or logs another entry
+            if selection in more:
+                continue
+            else:
+                finalIntake = sum(totalIntake)
+                print(f'Your total intake for today is {finalIntake} ml so far!')
+                return False
+                break
+                
+            if type(intakeAmt) is not int:
+                raise TypeError
+        except:
+            print("\nSomething went wrong, try again\n")
+    
+    
 
-new_cur = new_con.cursor()
+# Global code starts here ----------------------------------------------------------------------------------------------------------------------\
 
-res = new_cur.execute("SELECT title, year FROM movie ORDER BY score DESC")
-
-title, year = res.fetchone()
-
-print(f'The highest scoring Monty Python movie is {title!r}, released in {year}')
+IntakeLog()
