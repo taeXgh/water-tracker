@@ -18,16 +18,16 @@ greetingChoice = random.randrange(1, 6)
 more = 'y'
 
 def IntakeLog():
-    while more in 'yY':
+    while True:
         try:
             intakeAmt = int(input(f'{greetings.get(greetingChoice)}\nWater Amount in mL: '))
             print(f'Wow so far your water intake is {intakeAmt} mL today!')
-            choice = int(input('Do you want to log more water today? (y/n)'))
-            if choice not in more:
+            selection = input('Do you want to log more water today? (y/n)')
+            if selection in more:
+                continue
+            else:
                 return False
                 break
-            else:
-                continue
                 
             if type(intakeAmt) is not int:
                 raise TypeError
@@ -38,4 +38,3 @@ def IntakeLog():
 # Global code starts here ----------------------------------------------------------------------------------------------------------------------\
 
 IntakeLog()
-#another test
