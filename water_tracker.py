@@ -38,4 +38,4 @@ def IntakeLog():
 # Global code starts here ----------------------------------------------------------------------------------------------------------------------\
 
 IntakeLog()
-#test part 2
+#practicing commits
