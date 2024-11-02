@@ -14,21 +14,28 @@ greetings = {1 : "Hey thirsty! Let's track your water intake!",
              4 : "Look at you drinking water!\nHow much have you had?",
              5 : "You know the drill, how much water intake do you want to log?"}
 
-greetingChoice = random.randrange(1, 6)
+motivation = {1 : "Good job!", 
+             2 : "You're doing amazing sweetie!",
+             3 : "Yay! Good work :)",
+             4 : "WOOOOO you're killing it",
+             5 : "You'll reach your goal in no time ;)"}
+
+messageChoice = random.randrange(1, 6)
 more = 'y'
 totalIntake = []
 
 def IntakeLog():
     while True:
         try:
-            intakeAmt = int(input(f'{greetings.get(greetingChoice)}\nWater Amount in mL: '))
+            intakeAmt = int(input(f'{greetings.get(messageChoice)}\nWater Amount in mL: '))
             totalIntake.append(intakeAmt)
-            print(f'Wow so far your water intake is {intakeAmt} mL today!')
+            print(f'{motivation.get(messageChoice)}')
             selection = input('Do you want to log more water today? (y/n)')
             if selection in more:
                 continue
             else:
-                print(totalIntake)
+                finalIntake = sum(totalIntake)
+                print(f'Your total intake for today is {finalIntake} so far!')
                 return False
                 break
                 
