@@ -27,15 +27,15 @@ totalIntake = []
 def IntakeLog():
     while True:
         try:
-            intakeAmt = int(input(f'{greetings.get(messageChoice)}\nWater Amount in mL: '))
-            totalIntake.append(intakeAmt)
-            print(f'{motivation.get(messageChoice)}')
-            selection = input('Do you want to log more water today? (y/n)')
+            intakeAmt = int(input(f'{greetings.get(messageChoice)}\nWater Amount in mL: ')) #initial greeting 
+            totalIntake.append(intakeAmt) #adds every entry to the totalIntake list
+            print(f'{motivation.get(messageChoice)}')#selects a random motivational message to encourage the user
+            selection = input('Do you want to log more water today? (y/n)')#determines whether the program ends or logs another entry
             if selection in more:
                 continue
             else:
                 finalIntake = sum(totalIntake)
-                print(f'Your total intake for today is {finalIntake} so far!')
+                print(f'Your total intake for today is {finalIntake}ml so far!')
                 return False
                 break
                 

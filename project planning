@@ -1,0 +1,13 @@
+Purpose: Help users track daily water intake and store it in a log
+
+Core Features:
+Log water intake
+Use PyQt6 to create a GUI
+Save logs to a database with date, total amount of water drank, time
+Set reminders feature
+Set goal feature
+Calendar to see logs from previous days
+Let the user choose their measurement
+Set base target of intake and give positive reinforcement when the goal is reached
+Progress bar or glass filling up to show progress
+
