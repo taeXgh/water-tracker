@@ -2,7 +2,7 @@ import sqlite3 #adds the dependency
 con = sqlite3.connect("tutorial.db") #creates the database and connects to it
 
 cur = con.cursor()#creates a cursor to execute SQL statements and fetch results from queries
-cur.execute("CREATE TABLE movie(title, year, score)") #- executes the SQL command in the parenthesis
+cur.execute("CREATE TABLE IF NOT EXISTS movie(title, year, score)") #- executes the SQL command in the parenthesis
 
 res = cur.execute("SELECT name FROM sqlite_master")#result of the query
 res.fetchone()#fetches the row
@@ -29,3 +29,15 @@ con.commit()
 for row in cur.execute("SELECT year, title FROM movie ORDER BY year"):
 
     print(row)
+
+con.close()
+
+new_con = sqlite3.connect("tutorial.db")
+
+new_cur = new_con.cursor()
+
+res = new_cur.execute("SELECT title, year FROM movie ORDER BY score DESC")
+
+title, year = res.fetchone()
+
+print(f'The highest scoring Monty Python movie is {title!r}, released in {year}')
